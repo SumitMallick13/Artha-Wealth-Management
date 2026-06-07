@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artha Wealth Management</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --royal-blue: #1a3a6b;
+    --royal-blue-dark: #0d2347;
+    --royal-blue-light: #2454a0;
+    --royal-blue-pale: #e8eef8;
+    --orange: #f07d1f;
+    --orange-dark: #c96010;
+    --orange-light: #f9a05a;
+    --orange-pale: #fff4ea;
+    --white: #ffffff;
+    --off-white: #f9f8f5;
+    --gray-100: #f3f3f0;
+    --gray-200: #e2e2db;
+    --gray-600: #6b6b62;
+    --gray-800: #2c2c28;
+    --text: #1a1a16;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--white); overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(10, 22, 55, 0.97);
+    backdrop-filter: blur(12px);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 70px;
+    border-bottom: 1px solid rgba(240, 125, 31, 0.25);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .logo-icon {
+    width: 44px; height: 44px;
+    background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .logo-icon svg { width: 28px; height: 28px; }
+  .logo-text { color: white; }
+  .logo-text .artha { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; letter-spacing: 0.02em; }
+  .logo-text .sub { font-size: 10px; letter-spacing: 0.12em; color: var(--orange-light); text-transform: uppercase; font-weight: 500; }
+  .nav-links { display: flex; align-items: center; gap: 32px; }
+  .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.02em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--orange-light); }
+  .nav-cta {
+    background: var(--orange); color: white; border: none;
+    padding: 10px 22px; border-radius: 8px; font-size: 14px; font-weight: 600;
+    cursor: pointer; text-decoration: none; letter-spacing: 0.02em;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .nav-cta:hover { background: var(--orange-dark); transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, var(--royal-blue-dark) 0%, var(--royal-blue) 50%, #1e4a8a 100%);
+    position: relative; overflow: hidden;
+    display: flex; align-items: center;
+    padding: 90px 5% 60px;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -20%; right: -10%;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(240,125,31,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -10%; left: 20%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; max-width: 1200px; margin: 0 auto; width: 100%; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(240,125,31,0.15); border: 1px solid rgba(240,125,31,0.35);
+    color: var(--orange-light); font-size: 12px; font-weight: 600;
+    padding: 6px 14px; border-radius: 20px; letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .hero-badge span { width: 6px; height: 6px; background: var(--orange); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(38px, 5vw, 58px); font-weight: 700;
+    color: white; line-height: 1.15; margin-bottom: 20px;
+  }
+  .hero h1 em { color: var(--orange-light); font-style: normal; }
+  .hero p { color: rgba(255,255,255,0.72); font-size: 17px; line-height: 1.7; margin-bottom: 36px; max-width: 480px; }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--orange); color: white; border: none;
+    padding: 14px 28px; border-radius: 10px; font-size: 15px; font-weight: 600;
+    cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--orange-dark); transform: translateY(-2px); }
+  .btn-secondary {
+    background: transparent; color: white;
+    border: 1.5px solid rgba(255,255,255,0.35);
+    padding: 14px 28px; border-radius: 10px; font-size: 15px; font-weight: 500;
+    cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--orange-light); background: rgba(240,125,31,0.08); }
+  .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.08); border-radius: 14px; overflow: hidden; margin-top: 40px; }
+  .hero-stat { background: rgba(10,22,55,0.6); padding: 20px; text-align: center; }
+  .hero-stat .num { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--orange-light); }
+  .hero-stat .lbl { font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
+
+  /* Hero right: visual card */
+  .hero-visual {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 20px; padding: 28px;
+    backdrop-filter: blur(8px);
+  }
+  .hero-visual-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+  .hero-visual-header .title { color: white; font-weight: 600; font-size: 15px; }
+  .hero-visual-header .tag { background: rgba(240,125,31,0.2); color: var(--orange-light); font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 6px; }
+  .chart-bars { display: flex; align-items: flex-end; gap: 8px; height: 120px; margin-bottom: 16px; }
+  .bar { flex: 1; border-radius: 6px 6px 0 0; transition: height 0.3s; }
+  .bar.blue { background: rgba(100,140,220,0.5); }
+  .bar.orange { background: var(--orange); }
+  .growth-line { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px; }
+  .growth-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .growth-row .fund-name { color: rgba(255,255,255,0.7); font-size: 13px; }
+  .growth-row .growth { display: flex; align-items: center; gap: 6px; }
+  .growth-val { color: #4ade80; font-size: 13px; font-weight: 600; }
+  .growth-bar-bg { width: 80px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; }
+  .growth-bar-fill { height: 6px; background: var(--orange); border-radius: 3px; }
+
+  /* SECTION BASE */
+  section { padding: 90px 5%; }
+  .section-max { max-width: 1200px; margin: 0 auto; }
+  .section-tag {
+    display: inline-block; background: var(--orange-pale);
+    color: var(--orange-dark); font-size: 11px; font-weight: 700;
+    padding: 5px 14px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.1em;
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(30px, 3.5vw, 42px); font-weight: 700;
+    color: var(--royal-blue-dark); line-height: 1.2; margin-bottom: 16px;
+  }
+  .section-sub { color: var(--gray-600); font-size: 16px; line-height: 1.7; max-width: 560px; }
+
+  /* SERVICES */
+  .services { background: var(--off-white); }
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-top: 48px; }
+  .service-card {
+    background: white; border-radius: 16px; padding: 28px;
+    border: 1px solid var(--gray-200);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  .service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(26,58,107,0.1); }
+  .service-icon {
+    width: 52px; height: 52px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px;
+    font-size: 22px;
+  }
+  .service-icon.blue { background: var(--royal-blue-pale); color: var(--royal-blue); }
+  .service-icon.orange { background: var(--orange-pale); color: var(--orange-dark); }
+  .service-card h3 { font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 600; color: var(--royal-blue-dark); margin-bottom: 10px; }
+  .service-card p { font-size: 14px; color: var(--gray-600); line-height: 1.65; }
+
+  /* CALCULATORS */
+  .calculators { background: white; }
+  .calc-tabs { display: flex; gap: 8px; margin-bottom: 40px; flex-wrap: wrap; }
+  .calc-tab {
+    padding: 10px 22px; border-radius: 8px; font-size: 14px; font-weight: 600;
+    cursor: pointer; border: 1.5px solid var(--gray-200); background: white;
+    color: var(--gray-600); transition: all 0.2s;
+  }
+  .calc-tab.active { background: var(--royal-blue); color: white; border-color: var(--royal-blue); }
+  .calc-tab:hover:not(.active) { border-color: var(--royal-blue); color: var(--royal-blue); }
+  .calc-panel { display: none; }
+  .calc-panel.active { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+  .calc-inputs { display: flex; flex-direction: column; gap: 20px; }
+  .input-group label { display: block; font-size: 13px; font-weight: 600; color: var(--royal-blue-dark); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .input-row { display: flex; align-items: center; gap: 0; border: 1.5px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+  .input-prefix { padding: 12px 14px; background: var(--gray-100); font-size: 14px; font-weight: 600; color: var(--gray-600); border-right: 1.5px solid var(--gray-200); white-space: nowrap; }
+  .input-row input[type="number"] {
+    flex: 1; border: none; outline: none; padding: 12px 14px;
+    font-size: 15px; font-family: 'DM Sans', sans-serif; background: white;
+    color: var(--text);
+  }
+  .range-wrap { display: flex; flex-direction: column; gap: 6px; }
+  .range-wrap input[type="range"] { -webkit-appearance: none; width: 100%; height: 6px; background: var(--royal-blue-pale); border-radius: 3px; outline: none; }
+  .range-wrap input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 18px; height: 18px;
+    background: var(--royal-blue); border-radius: 50%; cursor: pointer;
+  }
+  .range-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--gray-600); }
+  .calc-result {
+    background: linear-gradient(135deg, var(--royal-blue-dark), var(--royal-blue));
+    border-radius: 16px; padding: 32px; color: white;
+  }
+  .result-main { margin-bottom: 24px; }
+  .result-main .label { font-size: 13px; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+  .result-main .value { font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 700; color: white; line-height: 1; }
+  .result-main .value span { font-size: 22px; color: var(--orange-light); }
+  .result-breakdown { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 20px; }
+  .res-item .lbl { font-size: 12px; color: rgba(255,255,255,0.55); margin-bottom: 4px; }
+  .res-item .val { font-size: 18px; font-weight: 600; color: white; }
+  .res-item .val.green { color: #4ade80; }
+  .calc-btn {
+    background: var(--orange); color: white; border: none;
+    padding: 14px 28px; border-radius: 10px; font-size: 15px; font-weight: 600;
+    cursor: pointer; width: 100%; margin-top: 8px;
+    transition: background 0.2s;
+  }
+  .calc-btn:hover { background: var(--orange-dark); }
+
+  /* WHY US */
+  .whyus { background: var(--off-white); }
+  .whyus-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-top: 48px; }
+  .feature-list { display: flex; flex-direction: column; gap: 20px; }
+  .feature-item { display: flex; gap: 16px; align-items: flex-start; }
+  .feature-dot { width: 36px; height: 36px; min-width: 36px; background: var(--orange-pale); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+  .feature-item h4 { font-weight: 600; color: var(--royal-blue-dark); margin-bottom: 4px; font-size: 15px; }
+  .feature-item p { font-size: 13px; color: var(--gray-600); line-height: 1.6; }
+  .whyus-visual {
+    background: linear-gradient(160deg, var(--royal-blue-dark), var(--royal-blue));
+    border-radius: 20px; padding: 32px; color: white; position: relative; overflow: hidden;
+  }
+  .whyus-visual::before {
+    content: ''; position: absolute; top: -30px; right: -30px;
+    width: 160px; height: 160px;
+    background: radial-gradient(circle, rgba(240,125,31,0.2) 0%, transparent 70%);
+  }
+  .fund-card { background: rgba(255,255,255,0.08); border-radius: 12px; padding: 16px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
+  .fund-card .name { font-size: 14px; font-weight: 500; }
+  .fund-card .category { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+  .fund-card .returns { text-align: right; }
+  .fund-card .ret-val { font-size: 18px; font-weight: 700; color: #4ade80; }
+  .fund-card .ret-period { font-size: 11px; color: rgba(255,255,255,0.5); }
+
+  /* CONTACT / CTA */
+  .contact-section {
+    background: linear-gradient(160deg, var(--royal-blue-dark) 0%, var(--royal-blue) 100%);
+    padding: 90px 5%;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .contact-section::before {
+    content: ''; position: absolute; top: -50%; left: 50%; transform: translateX(-50%);
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(240,125,31,0.08) 0%, transparent 60%);
+  }
+  .contact-section h2 { font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 700; color: white; margin-bottom: 16px; position: relative; }
+  .contact-section p { color: rgba(255,255,255,0.7); font-size: 17px; margin-bottom: 40px; position: relative; }
+  .contact-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; max-width: 900px; margin: 0 auto 48px; }
+  .contact-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px; padding: 28px; text-align: center; transition: background 0.2s;
+    cursor: pointer;
+  }
+  .contact-card:hover { background: rgba(255,255,255,0.12); }
+  .contact-card .cc-icon { font-size: 32px; margin-bottom: 12px; }
+  .contact-card h4 { color: white; font-weight: 600; font-size: 15px; margin-bottom: 6px; }
+  .contact-card p { color: rgba(255,255,255,0.6); font-size: 13px; }
+  .whatsapp-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #25D366; color: white;
+    padding: 16px 36px; border-radius: 12px; font-size: 16px; font-weight: 700;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    position: relative;
+  }
+  .whatsapp-btn:hover { background: #1db954; transform: translateY(-2px); }
+  .whatsapp-btn svg { width: 24px; height: 24px; }
+
+  /* FOOTER */
+  footer {
+    background: var(--royal-blue-dark);
+    padding: 48px 5% 28px;
+    border-top: 1px solid rgba(240,125,31,0.2);
+  }
+  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+  .footer-brand p { color: rgba(255,255,255,0.55); font-size: 14px; line-height: 1.7; margin-top: 12px; max-width: 280px; }
+  .footer-col h5 { color: white; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+  .footer-col a { display: block; color: rgba(255,255,255,0.55); text-decoration: none; font-size: 13px; margin-bottom: 8px; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--orange-light); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: gap; }
+  .footer-bottom p { color: rgba(255,255,255,0.4); font-size: 12px; }
+  .disclaimer { color: rgba(255,255,255,0.3); font-size: 11px; line-height: 1.6; margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-content > * { animation: fadeUp 0.6s ease both; }
+  .hero-content > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-content > *:nth-child(2) { animation-delay: 0.2s; }
+  .hero-content > *:nth-child(3) { animation-delay: 0.3s; }
+  .hero-content > *:nth-child(4) { animation-delay: 0.4s; }
+  .hero-content > *:nth-child(5) { animation-delay: 0.5s; }
+
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .calc-panel.active { grid-template-columns: 1fr; }
+    .whyus-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="logo-icon">
+      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Tree trunk -->
+        <rect x="12" y="16" width="4" height="8" rx="1" fill="white" opacity="0.9"/>
+        <!-- Tree top (triangle) -->
+        <polygon points="14,2 4,18 24,18" fill="white" opacity="0.9"/>
+        <!-- Arrow up-right -->
+        <path d="M17 6 L22 6 L22 11" stroke="#f07d1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M22 6 L16 12" stroke="#f07d1f" stroke-width="2" stroke-linecap="round"/>
+        <!-- Rupee symbol hint -->
+        <text x="10" y="16" font-size="8" fill="#f07d1f" font-weight="bold">₹</text>
+      </svg>
+    </div>
+    <div class="logo-text">
+      <div class="artha">Artha</div>
+      <div class="sub">Wealth Management</div>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#calculators">Calculators</a>
+    <a href="#why-us">Why Us</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a class="nav-cta" href="#contact">Start Investing</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid section-max">
+    <div class="hero-content">
+      <div class="hero-badge"><span></span> SEBI Registered Distributor</div>
+      <h1>Grow Your <em>Wealth</em><br>with Smart<br>Mutual Funds</h1>
+      <p>Expert guidance in mutual fund investments tailored to your financial goals. Let your money work harder than you do.</p>
+      <div class="hero-actions">
+        <a href="#calculators" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 7H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-3"/><path d="M18 2h-6v6"/><path d="M12 8L18 2"/></svg>
+          Start SIP Calculator
+        </a>
+        <a href="#contact" class="btn-secondary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Talk to an Expert
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="num">MFD</div>
+          <div class="lbl">NISM Certified</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">SEBI</div>
+          <div class="lbl">Registered Distributor</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">100%</div>
+          <div class="lbl">Unbiased Advice</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-visual-header">
+        <div class="title">Portfolio Growth</div>
+        <div class="tag">2024 Returns</div>
+      </div>
+      <div class="chart-bars">
+        <div class="bar blue" style="height:40%"></div>
+        <div class="bar blue" style="height:55%"></div>
+        <div class="bar blue" style="height:48%"></div>
+        <div class="bar orange" style="height:70%"></div>
+        <div class="bar blue" style="height:60%"></div>
+        <div class="bar blue" style="height:75%"></div>
+        <div class="bar orange" style="height:85%"></div>
+        <div class="bar orange" style="height:90%"></div>
+        <div class="bar orange" style="height:78%"></div>
+        <div class="bar orange" style="height:95%"></div>
+      </div>
+      <div class="growth-line">
+        <div class="growth-row">
+          <span class="fund-name">Flexi Cap Fund</span>
+          <div class="growth">
+            <div class="growth-bar-bg"><div class="growth-bar-fill" style="width:85%"></div></div>
+            <span class="growth-val">+28.4%</span>
+          </div>
+        </div>
+        <div class="growth-row">
+          <span class="fund-name">Mid Cap Fund</span>
+          <div class="growth">
+            <div class="growth-bar-bg"><div class="growth-bar-fill" style="width:72%"></div></div>
+            <span class="growth-val">+22.1%</span>
+          </div>
+        </div>
+        <div class="growth-row">
+          <span class="fund-name">Debt Fund</span>
+          <div class="growth">
+            <div class="growth-bar-bg"><div class="growth-bar-fill" style="width:40%"></div></div>
+            <span class="growth-val">+8.7%</span>
+          </div>
+        </div>
+        <div class="growth-row">
+          <span class="fund-name">ELSS Fund</span>
+          <div class="growth">
+            <div class="growth-bar-bg"><div class="growth-bar-fill" style="width:90%"></div></div>
+            <span class="growth-val">+31.2%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-max">
+    <div class="section-tag">What We Offer</div>
+    <h2 class="section-title">Comprehensive Wealth Solutions</h2>
+    <p class="section-sub">From goal-based planning to tax-saving investments, we help you build a portfolio that grows with your ambitions.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon blue">📈</div>
+        <h3>SIP Planning</h3>
+        <p>Systematic Investment Plans designed around your income, goals, and timeline. Small consistent investments that compound into life-changing wealth.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon orange">🏦</div>
+        <h3>Goal-Based Investing</h3>
+        <p>Whether it's your child's education, retirement, or a dream home — we map the right funds to every life milestone.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon blue">💰</div>
+        <h3>Tax-Saving (ELSS)</h3>
+        <p>Save up to ₹1.5 lakh under Section 80C while earning potentially higher returns than traditional tax-saving instruments.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon orange">⚖️</div>
+        <h3>Portfolio Review</h3>
+        <p>Regular portfolio health checks, rebalancing recommendations, and fund switching advice to keep your returns optimised.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon blue">🔐</div>
+        <h3>Debt & Hybrid Funds</h3>
+        <p>Capital protection with better-than-FD returns. Ideal for conservative investors seeking stability alongside growth.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon orange">🌱</div>
+        <h3>Lumpsum Investment</h3>
+        <p>Strategic one-time investments in bull and bear markets. We help you time entries for maximum long-term impact.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULATORS -->
+<section class="calculators" id="calculators">
+  <div class="section-max">
+    <div class="section-tag">Smart Tools</div>
+    <h2 class="section-title">Plan, Calculate, Grow</h2>
+    <p class="section-sub">See the real cost of waiting and the real power of starting now. Every day matters.</p>
+
+    <div class="calc-tabs" style="margin-top:36px">
+      <button class="calc-tab active" onclick="switchTab('sip')">SIP Calculator</button>
+      <button class="calc-tab" onclick="switchTab('delay')">Cost of Delay</button>
+      <button class="calc-tab" onclick="switchTab('inflation')">Inflation Impact</button>
+    </div>
+
+    <!-- SIP TAB -->
+    <div class="calc-panel active" id="tab-sip">
+      <div class="calc-inputs">
+        <div class="input-group">
+          <label>Monthly SIP Amount</label>
+          <div class="input-row">
+            <span class="input-prefix">₹</span>
+            <input type="number" id="sip_amount" value="5000" oninput="calcSIP()">
+          </div>
+        </div>
+        <div class="input-group">
+          <label>Expected Return Rate (% p.a.)</label>
+          <div class="range-wrap">
+            <input type="range" id="sip_rate" min="6" max="30" value="12" step="0.5" oninput="document.getElementById('sip_rate_val').textContent=this.value+'%'; calcSIP()">
+            <div class="range-label"><span>6%</span><span id="sip_rate_val">12%</span><span>30%</span></div>
+          </div>
+        </div>
+        <div class="input-group">
+          <label>Investment Duration (Years)</label>
+          <div class="range-wrap">
+            <input type="range" id="sip_years" min="1" max="40" value="10" step="1" oninput="document.getElementById('sip_years_val').textContent=this.value+' yrs'; calcSIP()">
+            <div class="range-label"><span>1 yr</span><span id="sip_years_val">10 yrs</span><span>40 yrs</span></div>
+          </div>
+        </div>
+        <button class="calc-btn" onclick="calcSIP()">Calculate Returns</button>
+      </div>
+      <div class="calc-result" id="sip_result">
+        <div class="result-main">
+          <div class="label">Estimated Corpus</div>
+          <div class="value" id="sip_corpus"><span>₹</span>11.6L</div>
+        </div>
+        <div class="result-breakdown">
+          <div class="res-item">
+            <div class="lbl">Amount Invested</div>
+            <div class="val" id="sip_invested">₹6L</div>
+          </div>
+          <div class="res-item">
+            <div class="lbl">Wealth Gained</div>
+            <div class="val green" id="sip_gained">₹5.6L</div>
+          </div>
+          <div class="res-item">
+            <div class="lbl">Return on Investment</div>
+            <div class="val green" id="sip_roi">93%</div>
+          </div>
+          <div class="res-item">
+            <div class="lbl">Monthly SIP</div>
+            <div class="val" id="sip_monthly">₹5,000</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DELAY TAB -->
+    <div class="calc-panel" id="tab-delay">
+      <div class="calc-inputs">
+        <div class="input-group">
+          <label>Monthly SIP Amount</label>
+          <div class="input-row">
+            <span class="input-prefix">₹</span>
+            <input type="number" id="delay_amount" value="10000" oninput="calcDelay()">
+          </div>
+        </div>
+        <div class="input-group">
+          <label>Expected Return Rate (% p.a.)</label>
+          <div class="range-wrap">
+            <input type="range" id="delay_rate" min="6" max="20" value="12" step="0.5" oninput="document.getElementById('delay_rate_val').textContent=this.value+'%'; calcDelay()">
+            <div class="range-label"><span>6%</span><span id="delay_rate_val">12%</span><span>20%</span></div>
+          </div>
+        </div>
+        <div class="input-group">
+          <label>Investment Duration (Years)</label>
+          <div class="range-wrap">
+            <input type="range" id="delay_years" min="5" max="40" value="20" step="1" oninput="document.getElementById('delay_years_val').textContent=this.value+' yrs'; calcDelay()">
+            <div class="range-label"><span>5 yrs</span><span id="delay_years_val">20 yrs</span><span>40 yrs</span></div>
+          </div>
+        </div>
+        <div class="input-group">
+          <label>Delay Period (Years)</label>
+          <div class="range-wrap">
+            <input type="range" id="delay_gap" min="1" max="10" value="3" step="1" oninput="document.getElementById('delay_gap_val').textContent=this.value+' yrs'; calcDelay()">
+            <div class="range-label"><span>1 yr</span><span id="delay_gap_val">3 yrs</span><span>10 yrs</span></div>
+          </div>
+        </div>
+        <button class="calc-btn" onclick="calcDelay()">Show Cost of Delay</button>
+      </div>
+      <div class="calc-result" id="delay_result">
+        <div class="result-main">
+          <div class="label">Money Lost by Delaying</div>
+          <div class="value" id="delay_loss"><span>₹</span>Loading...</div>
+        </div>
+        <div class="result-breakdown">
+          <div class="res-item">
+            <div class="lbl">If you start TODAY</div>
+            <div class="val" id="delay_now">—</div>
+          </div>
+          <div class="res-item">
+            <div class="lbl">If you delay</div>
+            <div class="val" id="delay_later">—</div>
+          </div>
+        </div>
+        <div style="margin-top:16px; background:rgba(240,125,31,0.2); border-radius:8px; padding:12px; font-size:13px; color:rgba(255,255,255,0.8); line-height:1.6;">
+          ⏰ Every year of delay costs you a significant portion of your potential wealth. <strong style="color:var(--orange-light)">Start today.</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- INFLATION TAB -->
+    <div class="calc-panel" id="tab-inflation">
+      <div class="calc-inputs">
+        <div class="input-group">
+          <label>Current Value of Goal</label>
+          <div class="input-row">
+            <span class="input-prefix">₹</span>
+            <input type="number" id="inf_amount" value="1000000" oninput="calcInflation()">
+          </div>
+        </div>
+        <div class="input-group">
+          <label>Inflation Rate (% p.a.)</label>
+          <div class="range-wrap">
+            <input type="range" id="inf_rate" min="4" max="12" value="6" step="0.5" oninput="document.getElementById('inf_rate_val').textContent=this.value+'%'; calcInflation()">
+            <div class="range-label"><span>4%</span><span id="inf_rate_val">6%</span><span>12%</span></div>
+          </div>
+        </div>
+        <div class="input-group">
+          <label>Years Until Goal</label>
+          <div class="range-wrap">
+            <input type="range" id="inf_years" min="1" max="30" value="10" step="1" oninput="document.getElementById('inf_years_val').textContent=this.value+' yrs'; calcInflation()">
+            <div class="range-label"><span>1 yr</span><span id="inf_years_val">10 yrs</span><span>30 yrs</span></div>
+          </div>
+        </div>
+        <button class="calc-btn" onclick="calcInflation()">Calculate Inflation Impact</button>
+      </div>
+      <div class="calc-result" id="inf_result">
+        <div class="result-main">
+          <div class="label">Future Cost of Your Goal</div>
+          <div class="value" id="inf_future"><span>₹</span>Loading...</div>
+        </div>
+        <div class="result-breakdown">
+          <div class="res-item">
+            <div class="lbl">Today's Value</div>
+            <div class="val" id="inf_today">₹10L</div>
+          </div>
+          <div class="res-item">
+            <div class="lbl">Extra Needed (Inflation)</div>
+            <div class="val" id="inf_extra" style="color:#f87171">—</div>
+          </div>
+          <div class="res-item">
+            <div class="lbl">Purchasing Power Lost</div>
+            <div class="val" id="inf_loss" style="color:#f87171">—</div>
+          </div>
+          <div class="res-item">
+            <div class="lbl">Inflation Rate</div>
+            <div class="val" id="inf_rate_display">6%</div>
+          </div>
+        </div>
+        <div style="margin-top:16px; background:rgba(240,125,31,0.2); border-radius:8px; padding:12px; font-size:13px; color:rgba(255,255,255,0.8); line-height:1.6;">
+          🔥 Inflation silently erodes your savings. Only <strong style="color:var(--orange-light)">investments that beat inflation</strong> truly grow your wealth.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="whyus" id="why-us">
+  <div class="section-max">
+    <div class="section-tag">Why Artha</div>
+    <h2 class="section-title">Your Trusted Wealth Partner</h2>
+    <div class="whyus-grid">
+      <div class="feature-list">
+        <div class="feature-item">
+          <div class="feature-dot">🎯</div>
+          <div>
+            <h4>Goal-Centric Approach</h4>
+            <p>Every portfolio is built around your specific life goals — not generic market strategies. Your dreams drive our recommendations.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-dot">🔍</div>
+          <div>
+            <h4>Unbiased Fund Selection</h4>
+            <p>We analyze 1000+ schemes across AMCs to recommend only the best performers for your risk profile and time horizon.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-dot">📊</div>
+          <div>
+            <h4>Regular Portfolio Reviews</h4>
+            <p>Quarterly review calls and rebalancing alerts ensure your portfolio stays on track even when markets get volatile.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-dot">🛡️</div>
+          <div>
+            <h4>SEBI Registered & Compliant</h4>
+            <p>Fully registered mutual fund distributor operating under SEBI guidelines. Your investments are safe and transparent.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-dot">⚡</div>
+          <div>
+            <h4>Quick WhatsApp Support</h4>
+            <p>Get instant answers, portfolio updates, and investment advice directly on WhatsApp. We're always just a message away.</p>
+          </div>
+        </div>
+      </div>
+      <div class="whyus-visual">
+        <div style="color:rgba(255,255,255,0.6); font-size:12px; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:16px;">Top Performing Funds We Recommend</div>
+        <div class="fund-card">
+          <div><div class="name">Mirae Asset Large Cap</div><div class="category">Large Cap · Low Risk</div></div>
+          <div class="returns"><div class="ret-val">+19.8%</div><div class="ret-period">5 yr CAGR</div></div>
+        </div>
+        <div class="fund-card">
+          <div><div class="name">Parag Parikh Flexi Cap</div><div class="category">Flexi Cap · Moderate Risk</div></div>
+          <div class="returns"><div class="ret-val">+24.3%</div><div class="ret-period">5 yr CAGR</div></div>
+        </div>
+        <div class="fund-card">
+          <div><div class="name">Axis Small Cap Fund</div><div class="category">Small Cap · High Risk</div></div>
+          <div class="returns"><div class="ret-val">+31.6%</div><div class="ret-period">5 yr CAGR</div></div>
+        </div>
+        <div class="fund-card">
+          <div><div class="name">HDFC Balanced Advantage</div><div class="category">Hybrid · Moderate Risk</div></div>
+          <div class="returns"><div class="ret-val">+14.2%</div><div class="ret-period">5 yr CAGR</div></div>
+        </div>
+        <div style="margin-top:16px; background:rgba(240,125,31,0.15); border-radius:10px; padding:14px;">
+          <div style="font-size:12px; color:rgba(255,255,255,0.5);">*Past performance does not guarantee future returns. Mutual fund investments are subject to market risks.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT CTA -->
+<section class="contact-section" id="contact">
+  <div class="section-max" style="position:relative">
+    <div class="section-tag" style="background:rgba(240,125,31,0.2); color:var(--orange-light)">Get Started Today</div>
+    <h2>Ready to Grow Your Wealth?</h2>
+    <p>Speak to our expert advisors — no commitment, completely free consultation.</p>
+    <div class="contact-cards">
+      <div class="contact-card">
+        <div class="cc-icon">📱</div>
+        <h4>WhatsApp Consultation</h4>
+        <p>Chat with us instantly. Get personalised investment advice in minutes.</p>
+      </div>
+      <div class="contact-card">
+        <div class="cc-icon">📋</div>
+        <h4>Free Portfolio Review</h4>
+        <p>Already investing? Let us audit your portfolio for free and suggest improvements.</p>
+      </div>
+      <div class="contact-card">
+        <div class="cc-icon">🎯</div>
+        <h4>Goal Planning Session</h4>
+        <p>Share your financial goals. We'll map out the exact investment roadmap for you.</p>
+      </div>
+    </div>
+    <a href="https://wa.me/917003951662?text=Hi!%20I%20want%20to%20start%20investing%20with%20Artha%20Wealth%20Management." class="whatsapp-btn" id="whatsapp-btn">
+      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.558 4.14 1.532 5.876L.072 23.927l6.244-1.434A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.805 9.805 0 0 1-5.012-1.375l-.36-.214-3.724.855.883-3.598-.234-.371A9.812 9.812 0 0 1 2.182 12C2.182 6.561 6.561 2.182 12 2.182S21.818 6.561 21.818 12 17.439 21.818 12 21.818z"/>
+      </svg>
+      Chat on WhatsApp — It's Free
+    </a>
+    <p style="color:rgba(255,255,255,0.4); font-size:12px; margin-top:16px;">Tap the button above to open WhatsApp directly</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo" style="margin-bottom:0">
+        <div class="logo-icon">
+          <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="12" y="16" width="4" height="8" rx="1" fill="white" opacity="0.9"/>
+            <polygon points="14,2 4,18 24,18" fill="white" opacity="0.9"/>
+            <path d="M17 6 L22 6 L22 11" stroke="#f07d1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M22 6 L16 12" stroke="#f07d1f" stroke-width="2" stroke-linecap="round"/>
+            <text x="10" y="16" font-size="8" fill="#f07d1f" font-weight="bold">₹</text>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <div class="artha">Artha</div>
+          <div class="sub">Wealth Management</div>
+        </div>
+      </a>
+      <p>A trusted SEBI registered mutual fund distributor committed to helping individuals build lasting wealth through disciplined investing.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Services</h5>
+      <a href="#services">SIP Planning</a>
+      <a href="#services">Goal Planning</a>
+      <a href="#services">Tax Saving ELSS</a>
+      <a href="#services">Portfolio Review</a>
+      <a href="#services">Debt Funds</a>
+    </div>
+    <div class="footer-col">
+      <h5>Tools</h5>
+      <a href="#calculators">SIP Calculator</a>
+      <a href="#calculators">Cost of Delay</a>
+      <a href="#calculators">Inflation Impact</a>
+    </div>
+    <div class="footer-col">
+      <h5>Connect</h5>
+      <a href="https://wa.me/917003951662">WhatsApp Us</a>
+      <a href="#contact">Free Consultation</a>
+      <a href="#why-us">About Us</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 Artha Wealth Management. All rights reserved.</p>
+  </div>
+  <div class="disclaimer">
+    Mutual fund investments are subject to market risks. Please read all scheme related documents carefully before investing. Past performance is not indicative of future returns. Artha Wealth Management is a registered mutual fund distributor. ARN: XXXXXX. Registration does not guarantee quality of service or returns.
+  </div>
+</footer>
+
+<script>
+function fmt(n) {
+  if (n >= 10000000) return '₹' + (n/10000000).toFixed(2) + 'Cr';
+  if (n >= 100000) return '₹' + (n/100000).toFixed(2) + 'L';
+  if (n >= 1000) return '₹' + (n/1000).toFixed(1) + 'K';
+  return '₹' + Math.round(n).toLocaleString('en-IN');
+}
+
+function sipFV(monthly, ratePA, years) {
+  const r = ratePA / 100 / 12;
+  const n = years * 12;
+  if (r === 0) return monthly * n;
+  return monthly * ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
+}
+
+function calcSIP() {
+  const amt = parseFloat(document.getElementById('sip_amount').value) || 5000;
+  const rate = parseFloat(document.getElementById('sip_rate').value) || 12;
+  const years = parseInt(document.getElementById('sip_years').value) || 10;
+  const corpus = sipFV(amt, rate, years);
+  const invested = amt * years * 12;
+  const gained = corpus - invested;
+  const roi = (gained / invested * 100);
+  document.getElementById('sip_corpus').innerHTML = '<span>₹</span>' + fmt(corpus).replace('₹','');
+  document.getElementById('sip_invested').textContent = fmt(invested);
+  document.getElementById('sip_gained').textContent = fmt(gained);
+  document.getElementById('sip_roi').textContent = roi.toFixed(1) + '%';
+  document.getElementById('sip_monthly').textContent = '₹' + amt.toLocaleString('en-IN');
+}
+
+function calcDelay() {
+  const amt = parseFloat(document.getElementById('delay_amount').value) || 10000;
+  const rate = parseFloat(document.getElementById('delay_rate').value) || 12;
+  const years = parseInt(document.getElementById('delay_years').value) || 20;
+  const gap = parseInt(document.getElementById('delay_gap').value) || 3;
+  const nowVal = sipFV(amt, rate, years);
+  const laterVal = sipFV(amt, rate, years - gap);
+  const loss = nowVal - laterVal;
+  document.getElementById('delay_loss').innerHTML = '<span>₹</span>' + fmt(loss).replace('₹','');
+  document.getElementById('delay_now').textContent = fmt(nowVal);
+  document.getElementById('delay_later').textContent = fmt(laterVal);
+}
+
+function calcInflation() {
+  const amt = parseFloat(document.getElementById('inf_amount').value) || 1000000;
+  const rate = parseFloat(document.getElementById('inf_rate').value) || 6;
+  const years = parseInt(document.getElementById('inf_years').value) || 10;
+  const future = amt * Math.pow(1 + rate/100, years);
+  const extra = future - amt;
+  const ppLoss = (1 - amt/future) * 100;
+  document.getElementById('inf_future').innerHTML = '<span>₹</span>' + fmt(future).replace('₹','');
+  document.getElementById('inf_today').textContent = fmt(amt);
+  document.getElementById('inf_extra').textContent = fmt(extra);
+  document.getElementById('inf_loss').textContent = ppLoss.toFixed(1) + '%';
+  document.getElementById('inf_rate_display').textContent = rate + '%';
+}
+
+function switchTab(name) {
+  document.querySelectorAll('.calc-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.calc-panel').forEach(p => p.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('tab-' + name).classList.add('active');
+}
+
+// Init all
+calcSIP();
+calcDelay();
+calcInflation();
+</script>
+</body>
+</html>
