@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,7 +47,7 @@
     display: flex; align-items: center; justify-content: center;
     position: relative; overflow: hidden;
   }
-  .logo-icon img { width: 100%; height: 100%; object-fit: contain; }
+  .logo-icon img { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; }
   .logo-text { color: white; }
   .logo-text .artha { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; letter-spacing: 0.02em; }
   .logo-text .sub { font-size: 10px; letter-spacing: 0.12em; color: var(--orange-light); text-transform: uppercase; font-weight: 500; }
@@ -824,6 +825,7 @@ function calcDelay() {
   document.getElementById('delay_later').textContent = fmt(laterVal);
 }
 
+// Fixed function name to match input trigger
 function calcInflation() {
   const amt = parseFloat(document.getElementById('inf_amount').value) || 1000000;
   const rate = parseFloat(document.getElementById('inf_rate').value) || 6;
